@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Menu, X, Sparkles, Heart, Star, ChevronRight, Instagram, Mail, MapPin, Eye, Smile, Hand, Flower2, Wrench, ShoppingCart, Phone, Send, Trash2, Plus, Minus, MessageCircle } from 'lucide-react'
+import { Menu, X, Sparkles, Heart, Star, ChevronRight, Instagram, Mail, MapPin, Eye, Smile, Hand, Flower2, Wrench, ShoppingCart, Phone, Send, Trash2, Plus, Minus, MessageCircle, Tag, Percent, Clock } from 'lucide-react'
 import './App.css'
 
 /* ─── Types ─── */
@@ -26,6 +26,21 @@ interface Complemento {
   description: string
   price: number
   priceDisplay: string
+}
+
+interface Oferta {
+  id: string
+  name: string
+  brand: string
+  image: string
+  description: string
+  skinType: string
+  originalPrice: number
+  originalPriceDisplay: string
+  price: number
+  priceDisplay: string
+  discount: number
+  tag: string
 }
 
 /* ─── Product Data ─── */
@@ -221,7 +236,94 @@ const complementos: Complemento[] = [
   },
 ]
 
-type Page = 'home' | 'nosotros' | 'productos' | 'carrito' | 'contacto'
+const ofertas: Oferta[] = [
+  {
+    id: 'oferta-1',
+    name: 'Advanced Snail 96 Mucin Power Essence',
+    brand: 'COSRX',
+    image: 'https://images.unsplash.com/photo-1611930022073-b7a4ba5fcccd?w=400&h=500&fit=crop',
+    description: 'Esencia con 96% de extracto de baba de caracol filtrada. Hidrata en profundidad, repara la barrera cutánea y deja la piel luminosa.',
+    skinType: 'Todo tipo de piel',
+    originalPrice: 24500,
+    originalPriceDisplay: '$24.500',
+    price: 18900,
+    priceDisplay: '$18.900',
+    discount: 23,
+    tag: 'Más vendido',
+  },
+  {
+    id: 'oferta-2',
+    name: 'Glow Serum: Propolis + Niacinamida',
+    brand: 'Beauty of Joseon',
+    image: 'https://images.unsplash.com/photo-1608248543803-ba4f8c70ae0b?w=400&h=500&fit=crop',
+    description: 'Sérum iluminador con extracto de propóleo y niacinamida. Nutre, reduce manchas y aporta un glow natural incomparable.',
+    skinType: 'Piel opaca y con manchas',
+    originalPrice: 19900,
+    originalPriceDisplay: '$19.900',
+    price: 14900,
+    priceDisplay: '$14.900',
+    discount: 25,
+    tag: 'Favorito',
+  },
+  {
+    id: 'oferta-3',
+    name: 'Jade Roller Facial',
+    brand: 'KareBeauty Tools',
+    image: 'https://images.unsplash.com/photo-1590439471364-192aa70c0b53?w=400&h=500&fit=crop',
+    description: 'Rodillo de jade natural para masaje facial. Estimula la circulación, reduce la hinchazón y ayuda a la absorción de sérums.',
+    skinType: 'Todo tipo de piel',
+    originalPrice: 14900,
+    originalPriceDisplay: '$14.900',
+    price: 9900,
+    priceDisplay: '$9.900',
+    discount: 34,
+    tag: 'Oferta flash',
+  },
+  {
+    id: 'oferta-4',
+    name: 'Sheet Masks de Seda — Pack x5',
+    brand: 'KareBeauty',
+    image: 'https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=400&h=500&fit=crop',
+    description: 'Mascarillas faciales de seda con centella, niacinamida, propóleo, colágeno y aloe vera. Pack de 5 unidades.',
+    skinType: 'Todo tipo de piel',
+    originalPrice: 15800,
+    originalPriceDisplay: '$15.800',
+    price: 11500,
+    priceDisplay: '$11.500',
+    discount: 27,
+    tag: 'Pack ahorro',
+  },
+  {
+    id: 'oferta-5',
+    name: 'Madagascar Centella Ampoule',
+    brand: 'SKIN1004',
+    image: 'https://images.unsplash.com/photo-1570194065650-d99fb4a38691?w=400&h=500&fit=crop',
+    description: 'Ampolla calmante con centella asiática de Madagascar al 100%. Reduce irritación y fortalece la barrera cutánea.',
+    skinType: 'Piel sensible e irritada',
+    originalPrice: 22300,
+    originalPriceDisplay: '$22.300',
+    price: 16900,
+    priceDisplay: '$16.900',
+    discount: 24,
+    tag: 'Recomendado',
+  },
+  {
+    id: 'oferta-6',
+    name: 'Retinal Eye Cream',
+    brand: 'Beauty of Joseon',
+    image: 'https://images.unsplash.com/photo-1596755389378-c31d21fd1273?w=400&h=500&fit=crop',
+    description: 'Crema de contorno de ojos con retinal encapsulado y extracto de ginseng. Reduce líneas finas, ojeras y bolsas.',
+    skinType: 'Piel madura',
+    originalPrice: 26500,
+    originalPriceDisplay: '$26.500',
+    price: 19900,
+    priceDisplay: '$19.900',
+    discount: 25,
+    tag: 'Novedad',
+  },
+]
+
+type Page = 'home' | 'nosotros' | 'productos' | 'ofertas' | 'carrito' | 'contacto'
 type ProductTab = 'rostro' | 'ojos' | 'cuerpo' | 'manos'
 
 const productTabIcons: Record<ProductTab, React.ReactNode> = {
@@ -308,6 +410,7 @@ function App() {
               {([
                 { page: 'nosotros' as Page, label: 'Nosotros' },
                 { page: 'productos' as Page, label: 'Productos' },
+                { page: 'ofertas' as Page, label: 'Ofertas' },
                 { page: 'contacto' as Page, label: 'Contáctanos' },
               ]).map(({ page, label }) => (
                 <button
@@ -363,13 +466,13 @@ function App() {
         {mobileMenuOpen && (
           <div className="lg:hidden bg-white border-t border-camel-100 animate-fade-up">
             <div className="px-4 py-4 space-y-1">
-              {(['nosotros', 'productos', 'contacto'] as Page[]).map((page) => (
+              {(['nosotros', 'productos', 'ofertas', 'contacto'] as Page[]).map((page) => (
                 <button
                   key={page}
                   onClick={() => navigateTo(page)}
                   className="block w-full text-left px-4 py-3.5 text-sm font-semibold tracking-widest uppercase text-charcoal/60 hover:text-camel-500 hover:bg-camel-50 rounded-xl transition-all duration-300"
                 >
-                  {page === 'contacto' ? 'Contáctanos' : page.charAt(0).toUpperCase() + page.slice(1)}
+                  {page === 'contacto' ? 'Contáctanos' : page === 'ofertas' ? 'Ofertas del Mes' : page.charAt(0).toUpperCase() + page.slice(1)}
                 </button>
               ))}
             </div>
@@ -932,6 +1035,101 @@ function App() {
         </main>
       )}
 
+      {/* ─── Ofertas del Mes ─── */}
+      {currentPage === 'ofertas' && (
+        <main className="min-h-screen bg-gradient-to-b from-camel-50 to-white">
+          <section className="py-16 sm:py-24">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+              <div className="text-center space-y-5 mb-16 animate-fade-up">
+                <div className="inline-flex items-center gap-2 bg-red-50 px-5 py-2.5 rounded-full border border-red-200 shadow-sm">
+                  <Percent className="w-4 h-4 text-red-500" />
+                  <span className="text-xs font-semibold tracking-widest uppercase text-red-600">Descuentos Exclusivos</span>
+                </div>
+                <h1 className="font-serif text-5xl sm:text-6xl font-bold text-charcoal">Ofertas del Mes</h1>
+                <div className="w-24 h-1 bg-camel-500 mx-auto rounded-full" />
+                <p className="text-softgray max-w-2xl mx-auto text-lg">
+                  Aprovecha nuestras ofertas especiales en productos seleccionados de cosmética coreana.
+                  Disponibles por tiempo limitado.
+                </p>
+                <div className="inline-flex items-center gap-2 text-softgray text-sm">
+                  <Clock className="w-4 h-4" />
+                  <span>Ofertas válidas hasta agotar stock</span>
+                </div>
+              </div>
+
+              <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                {ofertas.map((oferta, i) => (
+                  <div
+                    key={oferta.id}
+                    className="group bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-700 border border-camel-100/50 hover:-translate-y-2 animate-fade-up"
+                    style={{ animationDelay: `${i * 100}ms` }}
+                  >
+                    <div className="relative aspect-square overflow-hidden">
+                      <img
+                        src={oferta.image}
+                        alt={oferta.name}
+                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                        onError={(e) => { (e.target as HTMLImageElement).src = 'https://placehold.co/400x400/faf6f1/b08968?text=KareBeauty' }}
+                      />
+                      <div className="absolute top-4 left-4 flex flex-col gap-2">
+                        <span className="bg-red-500 text-white text-xs font-bold px-3 py-1.5 rounded-full shadow-lg">
+                          -{oferta.discount}%
+                        </span>
+                        <span className="bg-white/90 backdrop-blur-sm text-charcoal text-xs font-semibold px-3 py-1.5 rounded-full shadow-sm">
+                          <Tag className="w-3 h-3 inline mr-1" />
+                          {oferta.tag}
+                        </span>
+                      </div>
+                      <div className="absolute inset-0 bg-charcoal/0 group-hover:bg-charcoal/20 transition-all duration-500 flex items-end justify-center pb-6 opacity-0 group-hover:opacity-100">
+                        <button
+                          onClick={() => addToCart({ ...oferta, brand: oferta.brand, skinType: oferta.skinType })}
+                          className="bg-white text-charcoal px-6 py-3 rounded-full font-semibold text-sm tracking-wider uppercase shadow-xl hover:bg-camel-500 hover:text-white transition-all duration-300 transform translate-y-4 group-hover:translate-y-0"
+                        >
+                          Agregar al carrito
+                        </button>
+                      </div>
+                    </div>
+                    <div className="p-6 space-y-3">
+                      <div className="flex items-center justify-between">
+                        <span className="text-xs font-bold tracking-widest uppercase text-camel-500">{oferta.brand}</span>
+                        <span className="text-xs text-softgray">{oferta.skinType}</span>
+                      </div>
+                      <h3 className="font-serif text-lg font-semibold text-charcoal leading-snug">{oferta.name}</h3>
+                      <p className="text-softgray text-sm leading-relaxed line-clamp-2">{oferta.description}</p>
+                      <div className="flex items-center gap-3 pt-2">
+                        <span className="text-2xl font-bold text-red-500">{oferta.priceDisplay}</span>
+                        <span className="text-lg text-softgray line-through">{oferta.originalPriceDisplay}</span>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              {/* CTA */}
+              <div className="mt-20 text-center animate-fade-up">
+                <div className="bg-charcoal rounded-3xl p-12 sm:p-16 relative overflow-hidden">
+                  <div className="absolute inset-0 pointer-events-none">
+                    <div className="absolute top-10 right-20 w-40 h-40 bg-camel-500/10 rounded-full blur-3xl animate-float" />
+                    <div className="absolute bottom-10 left-10 w-56 h-56 bg-camel-400/5 rounded-full blur-3xl animate-float-delayed" />
+                  </div>
+                  <div className="relative space-y-6">
+                    <h2 className="font-serif text-3xl sm:text-4xl font-bold text-white">¿No encuentras lo que buscas?</h2>
+                    <p className="text-white/50 text-lg max-w-xl mx-auto">Explora nuestra colección completa con más de 500 productos de cosmética coreana premium.</p>
+                    <button
+                      onClick={() => navigateTo('productos')}
+                      className="group inline-flex items-center gap-3 bg-camel-500 text-white px-10 py-4 rounded-full font-semibold text-sm tracking-wider uppercase hover:bg-camel-400 transition-all duration-500 shadow-xl hover:shadow-2xl hover:-translate-y-1"
+                    >
+                      Ver todos los productos
+                      <ChevronRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        </main>
+      )}
+
       {/* ─── Footer ─── */}
       <footer className="bg-charcoal text-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
@@ -948,9 +1146,9 @@ function App() {
             <div className="space-y-5">
               <h4 className="font-serif text-lg font-bold">Navegación</h4>
               <div className="space-y-3">
-                {(['home', 'nosotros', 'productos', 'contacto'] as Page[]).map((page) => (
+                {(['home', 'nosotros', 'productos', 'ofertas', 'contacto'] as Page[]).map((page) => (
                   <button key={page} onClick={() => navigateTo(page)} className="block text-white/40 hover:text-camel-400 transition-all duration-300 hover:translate-x-1">
-                    {page === 'home' ? 'Inicio' : page === 'contacto' ? 'Contáctanos' : page.charAt(0).toUpperCase() + page.slice(1)}
+                    {page === 'home' ? 'Inicio' : page === 'contacto' ? 'Contáctanos' : page === 'ofertas' ? 'Ofertas del Mes' : page.charAt(0).toUpperCase() + page.slice(1)}
                   </button>
                 ))}
               </div>
