@@ -299,7 +299,7 @@ function App() {
             <button onClick={() => navigateTo('home')} className="flex items-center gap-3 group">
               <Sparkles className="w-7 h-7 text-camel-500 transition-transform duration-500 group-hover:rotate-180 group-hover:scale-110" />
               <span className="font-serif text-2xl sm:text-3xl font-bold tracking-wide text-charcoal">
-                Beauty<span className="text-camel-500">Kare</span>
+                Kare<span className="text-camel-500">Beauty</span>
               </span>
             </button>
 
@@ -425,7 +425,7 @@ function App() {
                     src="https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=600&h=700&fit=crop"
                     alt="Rutina de skincare coreana"
                     className="relative rounded-3xl shadow-2xl object-cover w-full aspect-[4/5] hover:scale-[1.02] transition-transform duration-700"
-                    onError={(e) => { (e.target as HTMLImageElement).src = 'https://placehold.co/600x700/faf6f1/b08968?text=BeautyKare' }}
+                    onError={(e) => { (e.target as HTMLImageElement).src = 'https://placehold.co/600x700/faf6f1/b08968?text=KareBeauty' }}
                   />
                 </div>
               </div>
@@ -494,9 +494,9 @@ function App() {
                   <div className="absolute -inset-4 bg-camel-200/30 rounded-3xl transform rotate-2 group-hover:rotate-1 transition-transform duration-700" />
                   <img
                     src="https://images.unsplash.com/photo-1556228578-0d85b1a4d571?w=600&h=500&fit=crop"
-                    alt="Equipo BeautyKare"
+                    alt="Equipo KareBeauty"
                     className="relative rounded-3xl shadow-xl object-cover w-full h-80 lg:h-96 group-hover:shadow-2xl transition-shadow duration-700"
-                    onError={(e) => { (e.target as HTMLImageElement).src = 'https://placehold.co/600x500/faf6f1/b08968?text=BeautyKare+Team' }}
+                    onError={(e) => { (e.target as HTMLImageElement).src = 'https://placehold.co/600x500/faf6f1/b08968?text=KareBeauty+Team' }}
                   />
                 </div>
                 <div className="space-y-8 animate-fade-up">
@@ -504,7 +504,7 @@ function App() {
                     Pasión por la belleza coreana
                   </h2>
                   <p className="text-softgray leading-relaxed text-lg">
-                    <strong className="text-camel-600 font-semibold">BeautyKare</strong> nació de un amor profundo por la filosofía de skincare coreana,
+                    <strong className="text-camel-600 font-semibold">KareBeauty</strong> nació de un amor profundo por la filosofía de skincare coreana,
                     donde el cuidado de la piel es un ritual, no una obligación. Creemos que cada persona
                     merece acceso a productos de la más alta calidad, formulados con ingredientes innovadores
                     y respaldados por décadas de investigación dermatológica.
@@ -564,7 +564,7 @@ function App() {
               <blockquote className="font-serif text-2xl sm:text-4xl font-light text-white italic leading-relaxed">
                 &ldquo;La belleza coreana no se trata de cubrir imperfecciones, sino de nutrir tu piel hasta que brille por sí misma.&rdquo;
               </blockquote>
-              <p className="text-white/40 text-sm tracking-widest uppercase">— Filosofía BeautyKare</p>
+              <p className="text-white/40 text-sm tracking-widest uppercase">— Filosofía KareBeauty</p>
             </div>
           </section>
         </main>
@@ -840,9 +840,9 @@ function App() {
 
                   <div className="space-y-6">
                     {[
-                      { icon: <Mail className="w-6 h-6" />, title: 'Email', value: 'hola@beautykare.com', href: 'mailto:hola@beautykare.com' },
+                      { icon: <Mail className="w-6 h-6" />, title: 'Email', value: 'hola@karebeauty.com', href: 'mailto:hola@karebeauty.com' },
                       { icon: <Phone className="w-6 h-6" />, title: 'Teléfono', value: '+56 9 1234 5678', href: 'tel:+56912345678' },
-                      { icon: <Instagram className="w-6 h-6" />, title: 'Instagram', value: '@beautykare', href: 'https://instagram.com/beautykare' },
+                      { icon: <Instagram className="w-6 h-6" />, title: 'Instagram', value: '@karebeauty', href: 'https://instagram.com/karebeauty' },
                       { icon: <MapPin className="w-6 h-6" />, title: 'Ubicación', value: 'Santiago, Chile', href: undefined },
                     ].map((contact) => (
                       <div key={contact.title} className="flex items-start gap-5 group">
@@ -939,7 +939,7 @@ function App() {
             <div className="space-y-5 md:col-span-1">
               <div className="flex items-center gap-3">
                 <Sparkles className="w-6 h-6 text-camel-400" />
-                <span className="font-serif text-2xl font-bold">Beauty<span className="text-camel-400">Kare</span></span>
+                <span className="font-serif text-2xl font-bold">Kare<span className="text-camel-400">Beauty</span></span>
               </div>
               <p className="text-white/40 leading-relaxed">
                 Tu destino premium de cosmética coreana. Productos auténticos para una piel radiante.
@@ -968,13 +968,13 @@ function App() {
             <div className="space-y-5">
               <h4 className="font-serif text-lg font-bold">Contacto</h4>
               <div className="space-y-4">
-                <a href="mailto:hola@beautykare.com" className="flex items-center gap-3 text-white/40 hover:text-camel-400 transition-all duration-300">
+                <a href="mailto:hola@karebeauty.com" className="flex items-center gap-3 text-white/40 hover:text-camel-400 transition-all duration-300">
                   <Mail className="w-4 h-4" />
-                  hola@beautykare.com
+                  hola@karebeauty.com
                 </a>
-                <a href="https://instagram.com/beautykare" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 text-white/40 hover:text-camel-400 transition-all duration-300">
+                <a href="https://instagram.com/karebeauty" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 text-white/40 hover:text-camel-400 transition-all duration-300">
                   <Instagram className="w-4 h-4" />
-                  @beautykare
+                  @karebeauty
                 </a>
                 <p className="flex items-center gap-3 text-white/40">
                   <MapPin className="w-4 h-4" />
@@ -985,7 +985,7 @@ function App() {
           </div>
           <div className="border-t border-white/10 mt-16 pt-8 text-center">
             <p className="text-white/20 text-sm">
-              &copy; {new Date().getFullYear()} BeautyKare. Todos los derechos reservados.
+              &copy; {new Date().getFullYear()} KareBeauty. Todos los derechos reservados.
             </p>
           </div>
         </div>
